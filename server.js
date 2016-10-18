@@ -7,7 +7,7 @@ var stageTypes = {main: [], expert: [], special: [], mega: []};
 var url = "http://www.serebii.net/shuffle/pokemon.shtml";
 
 function hasDupl(list, division, item) {
-  return list[division].some(listItem => listItem.pokemonName === item.pokemonName && listItem.location === item.location)
+  return list[division].some(function(listItem) { return listItem.pokemonName === item.pokemonName && listItem.location === item.location })
 }
 
 request(url, function (error, response, body) {
