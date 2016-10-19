@@ -6,6 +6,10 @@ var stageTypes = {main: [], expert: [], special: [], mega: []};
 
 var url = "http://www.serebii.net/shuffle/pokemon.shtml";
 
+function hasDupl(list, division, item) {
+  return list[division].some(function(listItem) { return listItem.pokemonName === item.pokemonName && listItem.location === item.location })
+}
+
 request(url, function (error, response, body) {
   var pokemonTable;
   if (!error) {
@@ -42,8 +46,6 @@ request(url, function (error, response, body) {
       // trim RMLs & assign pokemon values
       if (pokemonName.includes('2') || pokemonName.includes('3') || pokemonName.includes('5') || pokemonName.includes('10')) {
         pokemonName = pokemonName.slice(0, pokemonName.length - 2);
-      } else {
-        pokemonName = pokemonName;
       }
 
       // M-zard X
@@ -90,18 +92,8 @@ request(url, function (error, response, body) {
     console.log("We’ve encountered an error: " + error);
   }
 
+  // cái này chạy async cẩn thận :-?
   fs.writeFile('output.json', JSON.stringify(stageTypes, null, 4), function(err){
       console.log('File successfully written! - Check your project directory for the output.json file');
     });
 });
-
-var hasDupl = function(list, division, item) {
-  var duplicated = false;
-  list[division].forEach(function (listItem) {
-    if (listItem.pokemonName === item.pokemonName && listItem.location === item.location) {
-      duplicated = true;
-    }
-  });
-
-  return duplicated;
-}
