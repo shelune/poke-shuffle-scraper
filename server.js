@@ -7,7 +7,9 @@ var stageTypes = {main: [], expert: [], special: [], mega: []};
 var url = "http://www.serebii.net/shuffle/pokemon.shtml";
 
 function hasDupl(list, division, item) {
-  return list[division].some(function(listItem) { return listItem.pokemonName === item.pokemonName && listItem.location === item.location })
+  return list[division].some(function(listItem) { 
+    return listItem.pokemonName === item.pokemonName && listItem.location === item.location 
+  });
 }
 
 request(url, function (error, response, body) {
@@ -76,6 +78,7 @@ request(url, function (error, response, body) {
       if (pokemonStage.includes('Special')) {
         stageTypes.special.push(pokemon);
       }
+
       if (pokemonStage.includes('Expert') || pokemonStage.includes('EX')) {
         if (!hasDupl(stageTypes, 'expert', pokemon)) {
           stageTypes.expert.push(pokemon);
@@ -92,7 +95,6 @@ request(url, function (error, response, body) {
     console.log("We’ve encountered an error: " + error);
   }
 
-  // cái này chạy async cẩn thận :-?
   fs.writeFile('output.json', JSON.stringify(stageTypes, null, 4), function(err){
       console.log('File successfully written! - Check your project directory for the output.json file');
     });
