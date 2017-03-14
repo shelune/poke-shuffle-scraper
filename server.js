@@ -7,8 +7,8 @@ var stageTypes = {main: [], expert: [], special: [], mega: []};
 var url = "http://www.serebii.net/shuffle/pokemon.shtml";
 
 function hasDupl(list, division, item) {
-  return list[division].some(function(listItem) { 
-    return listItem.pokemonName === item.pokemonName && listItem.location === item.location 
+  return list[division].some(function(listItem) {
+    return listItem.pokemonName === item.pokemonName && listItem.location === item.location
   });
 }
 
@@ -50,14 +50,22 @@ request(url, function (error, response, body) {
         pokemonName = pokemonName.slice(0, pokemonName.length - 2);
       }
 
-      // M-zard X
       if (pokemonName.toLowerCase().startsWith('mega ')) {
+        // M-Charizard X
         if (pokemonIcon.includes('-mx')) {
           pokemonName = pokemonName + '-X';
         }
-        if (pokemonIcon.includes('-ms')) {
+
+        // Mega Shiny
+        if (pokemonIcon.includes('-ms') || pokemonIcon.includes('-sm')) {
           pokemonName = pokemonName + '-S';
         }
+
+        // Mega Winking
+        if (pokemonIcon.includes('-mw')) {
+          pokemonName = pokemonName + '-W';
+        }
+
         stageTypes.mega.push(pokemon);
       } else {
         // handle different formes
@@ -90,12 +98,12 @@ request(url, function (error, response, body) {
         }
       });
     });
-      
+
   } else {
     console.log("We’ve encountered an error: " + error);
   }
 
-  fs.writeFile('output.json', JSON.stringify(stageTypes, null, 4), function(err){
+  fs.writeFile('pokemonCollection.json', JSON.stringify(stageTypes, null, 4), function(err){
       console.log('File successfully written! - Check your project directory for the output.json file');
     });
 });
