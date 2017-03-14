@@ -83,7 +83,7 @@ request(url, function (error, response, body) {
         pokemon.location = pokemonLocation;
       }
 
-      if (pokemonStage.includes('Special')) {
+      if (pokemonStage.includes('Special') || pokemonStage.toLowerCase().includes('not')) {
         stageTypes.special.push(pokemon);
       }
 
