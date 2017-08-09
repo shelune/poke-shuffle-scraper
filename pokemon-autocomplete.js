@@ -5,7 +5,6 @@ var cheerio = require('cheerio');
 var _ = require('lodash');
 var stageTypes = {main: [], expert: [], special: [], mega: []};
 
-var url = "http://pokemondb.net/spinoff/shuffle/stages";
 var baseUrl = "http://bulbapedia.bulbagarden.net/wiki/";
 var stagesArr = [
   'Expert_Stages',
@@ -27,8 +26,10 @@ var stagesArr = [
   'Desert_Umbra',
   'Violeta_Palace',
   'Blau_Salon',
-  'Glaucus_Hall',
-  'Nacht_Carnival'
+  'Graucus_Hall',
+  'Nacht_Carnival',
+  'Prasino_Woods',
+  'Zaffiro_Coast'
 ];
 
 _.map(stagesArr, phase => {
@@ -75,7 +76,7 @@ _.map(stagesArr, phase => {
       });
 
       fs.writeFile('stageCollection.json', JSON.stringify(stageTypes, null, 4), function(err){
-          console.log('File successfully written! - Check your project directory for the output.json file');
+          console.log('File successfully written! - Check your project directory for the stageCollection.json file');
       });
       console.log('stageTypes: ', stageTypes);
     } else {
@@ -83,8 +84,6 @@ _.map(stagesArr, phase => {
     }
   });
 });
-
-
 
 
 function hasDupl(list, division, item) {

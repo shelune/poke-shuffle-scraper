@@ -42,7 +42,8 @@ request(url, function (error, response, body) {
         'Desert Umbra',
         'Violeta Palace',
         'Blau Salon',
-        'Glaucus Hall'
+        'Glaucus Hall',
+        'Prasino Woods'
       ];
 
       // trim RMLs & assign pokemon values
@@ -104,6 +105,6 @@ request(url, function (error, response, body) {
   }
 
   fs.writeFile('pokemonCollection.json', JSON.stringify(stageTypes, null, 4), function(err){
-      console.log('File successfully written! - Check your project directory for the output.json file');
+      console.log('File successfully written! - Check your project directory for the pokemonCollection.json file');
     });
 });
