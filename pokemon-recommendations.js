@@ -43,7 +43,8 @@ request(url, function (error, response, body) {
         'Violeta Palace',
         'Blau Salon',
         'Glaucus Hall',
-        'Prasino Woods'
+        'Prasino Woods',
+        'Zaffiro Coast'
       ];
 
       // trim RMLs & assign pokemon values
